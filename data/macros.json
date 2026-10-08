@@ -1,0 +1,19 @@
+{
+  "swipe_right": {
+    "description": "Switch App (Alt+Tab)",
+    "type": "hotkey",
+    "keys": [
+      "alt",
+      "tab"
+    ]
+  },
+  "swipe_left": {
+    "description": "Previous App (Shift+Alt+Tab)",
+    "type": "hotkey",
+    "keys": [
+      "shift",
+      "alt",
+      "tab"
+    ]
+  }
+}
