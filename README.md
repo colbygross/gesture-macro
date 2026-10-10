@@ -2,6 +2,38 @@
 
 Control your computer, media, and hotkeys using custom body and hand gestures detected in real-time from your webcam. Runs 100% locally at high frame rates on both **macOS** and **Windows** without requiring a GPU.
 
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-0097A7?logo=google&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?logo=opencv&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?logo=scikitlearn&logoColor=white)
+![PySide6](https://img.shields.io/badge/PySide6_(Qt)-41CD52?logo=qt&logoColor=white)
+
+## 🧠 How It Works
+
+```
+Webcam ─► MediaPipe pose + hand landmarks ─► chest-relative normalization
+       ─► Random Forest classifier (poses) / motion learner (swipes, circles)
+       ─► debounce + cooldown ─► keystroke, media key, or shell command
+```
+
+You record your own samples for each gesture in the Studio, retrain in about a second, and map each gesture to an action. The default model and mappings ship in `models/` and `data/` so it works out of the box.
+
+---
+
+## 📦 Installation
+
+Requires Python 3.10+ and a webcam.
+
+```bash
+git clone https://github.com/colbygross/gesture-macro.git
+cd gesture-macro
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+Or use the launchers, which set up the environment for you: `./run_mac.sh` on macOS, `run_windows.bat` on Windows.
+
 ---
 
 ## ⚡ Key Highlights
@@ -84,6 +116,22 @@ Stored in `data/macros.json` and configurable in the Studio:
 | **`swipe_down`** | scroll | `scroll -300` | Smooth Scroll Down |
 | **`circle_cw`** | media | `volumeup` | Rotary Dial Volume Up (Clockwise) |
 | **`circle_ccw`** | media | `volumedown` | Rotary Dial Volume Down (Counter-Clockwise) |
+
+---
+
+## 🧪 Tests
+
+```bash
+python -m unittest discover tests
+```
+
+The suite covers the motion tracker, the motion learner, upper-body normalization, and the full detection pipeline.
+
+---
+
+## 🛠️ How It Was Built
+
+I built this project with AI coding agents, directing the work feature by feature (rig tracking, motion learning, the Studio GUI) and using the test suite to check each change before moving on.
 
 ---
 
